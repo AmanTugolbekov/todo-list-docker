@@ -39,11 +39,14 @@ export default function App() {
 
   return (
     <main className="app">
-      <h1>Todo List</h1>
+      <header>
+        <h1>Todo List</h1>
+        <p className="subtitle">Your day, beautifully organized.</p>
+      </header>
       <TodoForm onSubmit={handleCreate} />
-      {error && <p className="error">Ошибка: {error}</p>}
+      {error && <p className="error">Error: {error}</p>}
       {loading ? (
-        <p className="empty">Загрузка…</p>
+        <p className="empty">Loading…</p>
       ) : (
         <>
           <TodoList
@@ -53,7 +56,7 @@ export default function App() {
             onDelete={handleDelete}
           />
           <p className="counter">
-            Активных задач: {active} из {todos.length}
+            {active} of {todos.length} tasks active
           </p>
         </>
       )}

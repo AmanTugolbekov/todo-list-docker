@@ -23,11 +23,11 @@ export default function TodoForm({ onSubmit }) {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Что нужно сделать?"
-        aria-label="Название задачи"
+        placeholder="What needs to be done?"
+        aria-label="Task title"
       />
       <button type="submit" disabled={busy || !title.trim()}>
-        Добавить
+        Add
       </button>
     </form>
   );

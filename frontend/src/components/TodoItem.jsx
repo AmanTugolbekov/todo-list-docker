@@ -52,27 +52,27 @@ export default function TodoItem({ todo, onToggle, onRename, onDelete }) {
       <div className="todo-actions">
         {editing ? (
           <>
-            <button onClick={save} disabled={busy}>Сохранить</button>
+            <button onClick={save} disabled={busy}>Save</button>
             <button
               onClick={() => {
                 setDraft(todo.title);
                 setEditing(false);
               }}
             >
-              Отмена
+              Cancel
             </button>
           </>
         ) : (
           <>
             <button onClick={() => setEditing(true)} disabled={busy}>
-              Изменить
+              Edit
             </button>
             <button
               className="danger"
               onClick={() => onDelete(todo.id)}
               disabled={busy}
             >
-              Удалить
+              Delete
             </button>
           </>
         )}

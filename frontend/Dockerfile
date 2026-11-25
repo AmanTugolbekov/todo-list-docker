@@ -1,4 +1,4 @@
-# Сборка статики
+# Build the static files
 FROM node:20-alpine AS build
 
 WORKDIR /app
@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Раздача через Nginx
+# Serve them with Nginx
 FROM nginx:1.27-alpine
 
 COPY --from=build /app/dist /usr/share/nginx/html

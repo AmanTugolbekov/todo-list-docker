@@ -22,7 +22,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'internal server error' });
 });
 
-// Ждём готовности базы перед стартом, чтобы Docker Compose не гонял рестарты вхолостую
+// Wait for the database to be ready before starting, so Docker Compose
+// does not restart the container in vain
 async function start() {
   for (let attempt = 1; attempt <= 30; attempt++) {
     try {

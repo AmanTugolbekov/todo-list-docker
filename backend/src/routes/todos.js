@@ -3,7 +3,7 @@ const pool = require('../db');
 
 const router = express.Router();
 
-// GET /api/todos — список всех задач
+// GET /api/todos — list all tasks
 router.get('/', async (req, res, next) => {
   try {
     const result = await pool.query(
@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// POST /api/todos — создать задачу
+// POST /api/todos — create a task
 router.post('/', async (req, res, next) => {
   try {
     const { title } = req.body;
@@ -32,7 +32,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// PATCH /api/todos/:id — обновить задачу
+// PATCH /api/todos/:id — update a task
 router.patch('/:id', async (req, res, next) => {
   try {
     const id = Number(req.params.id);
@@ -75,7 +75,7 @@ router.patch('/:id', async (req, res, next) => {
   }
 });
 
-// DELETE /api/todos/:id — удалить задачу
+// DELETE /api/todos/:id — delete a task
 router.delete('/:id', async (req, res, next) => {
   try {
     const id = Number(req.params.id);

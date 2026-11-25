@@ -2,7 +2,7 @@ import TodoItem from './TodoItem.jsx';
 
 export default function TodoList({ todos, onToggle, onRename, onDelete }) {
   if (todos.length === 0) {
-    return <p className="empty">Задач пока нет — добавьте первую!</p>;
+    return <p className="empty">No tasks yet — add your first one!</p>;
   }
   return (
     <ul className="todo-list">
