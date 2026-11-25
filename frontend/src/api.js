@@ -13,10 +13,10 @@ async function request(path, options = {}) {
 
 export const getTodos = () => request('/api/todos');
 
-export const createTodo = (title) =>
+export const createTodo = ({ title, priority, dueDate }) =>
   request('/api/todos', {
     method: 'POST',
-    body: JSON.stringify({ title }),
+    body: JSON.stringify({ title, priority, dueDate }),
   });
 
 export const updateTodo = (id, patch) =>
@@ -27,3 +27,12 @@ export const updateTodo = (id, patch) =>
 
 export const deleteTodo = (id) =>
   request(`/api/todos/${id}`, { method: 'DELETE' });
+
+export const clearCompleted = () =>
+  request('/api/todos/completed', { method: 'DELETE' });
+
+export const reorderTodos = (orderedIds) =>
+  request('/api/todos/reorder', {
+    method: 'PATCH',
+    body: JSON.stringify({ orderedIds }),
+  });

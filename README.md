@@ -7,6 +7,18 @@ three containers: `frontend` (Nginx), `backend`, `db`.
 The UI is styled in an iPhone "Liquid Glass" look: frosted translucent layers, floating
 color blobs and the Inter typeface.
 
+## Features
+
+- Add, edit, complete and delete tasks
+- **Priorities** — Low / Medium / High with colored indicators
+- **Due dates** with overdue highlighting
+- **Filters** — All / Active / Completed, plus "Clear completed"
+- **Search** across task titles
+- **Progress bar** for completed tasks
+- **Drag & drop** reordering (persisted to the database)
+- **Dark mode** toggle (remembered between visits)
+- Liquid Glass UI with the Inter typeface
+
 ## Getting started
 
 ```bash
@@ -45,13 +57,20 @@ Optional: copy `.env.example` to `.env` and change the values
 
 ## API
 
-| Method | Path            | Description                        |
-|--------|-----------------|------------------------------------|
-| GET    | /api/todos      | list all todos                     |
-| POST   | /api/todos      | create `{ "title": "..." }`        |
-| PATCH  | /api/todos/:id  | update `{ title?, completed? }`    |
-| DELETE | /api/todos/:id  | delete                             |
-| GET    | /health         | service healthcheck                |
+| Method | Path                  | Description                                     |
+|--------|-----------------------|-------------------------------------------------|
+| GET    | /api/todos            | list all tasks                                  |
+| POST   | /api/todos            | create `{ title, priority?, dueDate? }`         |
+| PATCH  | /api/todos/:id        | update `{ title?, completed?, priority?, dueDate? }` |
+| DELETE | /api/todos/:id        | delete                                          |
+| PATCH  | /api/todos/reorder    | persist drag & drop order `{ orderedIds: [] }`  |
+| DELETE | /api/todos/completed  | clear all completed tasks                       |
+| GET    | /health               | service healthcheck                             |
+
+`priority` is `low` | `medium` | `high`; `dueDate` is `YYYY-MM-DD` or `null`.
+
+The backend runs idempotent `ALTER TABLE` migrations on startup, so an existing
+database is upgraded automatically.
 
 ## Local development (without Docker for the app itself)
 

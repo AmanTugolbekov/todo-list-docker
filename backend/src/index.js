@@ -36,9 +36,24 @@ async function start() {
     }
   }
 
+  await migrate();
+
   app.listen(PORT, () => {
     console.log(`API listening on port ${PORT}`);
   });
+}
+
+// Idempotent migrations: init.sql only runs on the first container start,
+// so existing databases get new columns here
+async function migrate() {
+  await pool.query(
+    "ALTER TABLE todos ADD COLUMN IF NOT EXISTS priority TEXT NOT NULL DEFAULT 'medium'"
+  );
+  await pool.query('ALTER TABLE todos ADD COLUMN IF NOT EXISTS due_date DATE');
+  await pool.query(
+    'ALTER TABLE todos ADD COLUMN IF NOT EXISTS position INTEGER NOT NULL DEFAULT 0'
+  );
+  console.log('Database schema is up to date');
 }
 
 start().catch((err) => {
